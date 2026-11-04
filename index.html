@@ -1,278 +1,766 @@
 <!DOCTYPE html>
-<html lang="zh-HK">
+<html lang="zh-Hant" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Palette Concept - The Creative Agency for Social Impact</title>
-  <style>
-    /* 全局樣式設定 */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    }
-    body {
-      color: #333;
-      background-color: #fcfcfc;
-      line-height: 1.6;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palette Concept | Color Your Life - Creative Agency for Social Impact</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cmyk: {
+                            cyan: '#00AEEF',
+                            magenta: '#EC008C',
+                            yellow: '#FFF200',
+                            key: '#1D1D1B'
+                        },
+                        brand: {
+                            dark: '#0F172A',
+                            card: '#1E293B',
+                            light: '#F8FAFC'
+                        }
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 6s ease infinite',
+                        'float': 'float 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+                            '50%': { 'background-size': '200% 200%', 'background-position': 'right center' },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter & Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #0B0F19;
+            color: #F3F4F6;
+        }
 
-    /* 頂部導覽列 */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 40px;
-      background: #ffffff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .logo-container img {
-      height: 45px;
-      width: auto;
-      display: block;
-    }
-    nav {
-      display: flex;
-      gap: 30px;
-    }
-    nav a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #0284c7;
-    }
+        /* CMYK Soft Glow effects */
+        .glow-cyan { box-shadow: 0 0 25px rgba(0, 174, 239, 0.35); }
+        .glow-magenta { box-shadow: 0 0 25px rgba(236, 0, 140, 0.35); }
+        .glow-yellow { box-shadow: 0 0 25px rgba(255, 242, 0, 0.35); }
 
-    /* 主視覺 Hero 區塊 */
-    .hero {
-      background: linear-gradient(135deg, #fbcfe8 0%, #e0f2fe 100%);
-      padding: 80px 20px;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      color: #1e293b;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #475569;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-    /* 關於我們區塊 */
-    section {
-      padding: 60px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .about-content {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .about-content h2 {
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      color: #1e293b;
-    }
-    .about-content p {
-      font-size: 1.05rem;
-      color: #64748b;
-      line-height: 1.8;
-    }
+        .glass-nav {
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-    /* 服務項目區塊 */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-    .service-card {
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      border-top: 4px solid #0284c7;
-    }
-    .service-card h3 {
-      font-size: 1.35rem;
-      margin-bottom: 15px;
-      color: #1e293b;
-    }
-    .service-card ul {
-      list-style: none;
-      color: #64748b;
-    }
-    .service-card ul li {
-      margin-bottom: 8px;
-    }
+        /* Custom CMYK Gradient Text */
+        .text-cmyk-gradient {
+            background: linear-gradient(135deg, #00AEEF 0%, #EC008C 50%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    /* 參考案例區塊 */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-    .portfolio-item {
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      text-align: left;
-    }
-    .portfolio-item img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-    .portfolio-info {
-      padding: 20px;
-    }
-    .badge {
-      display: inline-block;
-      background: #e0f2fe;
-      color: #0284c7;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      margin-bottom: 10px;
-    }
-    .portfolio-info h3 {
-      font-size: 1.25rem;
-      margin-bottom: 8px;
-      color: #1e293b;
-    }
-    .portfolio-info p {
-      color: #64748b;
-      font-size: 0.95rem;
-    }
-
-    /* 頁尾 */
-    footer {
-      background: #1e293b;
-      color: #fff;
-      text-align: center;
-      padding: 30px 20px;
-      margin-top: 60px;
-    }
-  </style>
+        .bg-cmyk-gradient {
+            background: linear-gradient(135deg, #00AEEF 0%, #EC008C 50%, #FFD700 100%);
+        }
+        
+        .cmyk-dot-c { background-color: #00AEEF; }
+        .cmyk-dot-m { background-color: #EC008C; }
+        .cmyk-dot-y { background-color: #FFF200; }
+        .cmyk-dot-k { background-color: #1D1D1B; }
+    </style>
 </head>
-<body>
+<body class="antialiased overflow-x-hidden">
 
-  <!-- 網站頂部導覽列與 Logo -->
-  <header>
-    <div class="logo-container">
-      <a href="index.html">
-        <img src="images/logo.png" alt="Palette Concept Logo">
-      </a>
-    </div>
-    <nav>
-      <a href="#about">關於我們</a>
-      <a href="#services">我們的服務</a>
-      <a href="#portfolio">參考案例</a>
-      <a href="#contact">聯絡我們</a>
-    </nav>
-  </header>
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo (Image Version) -->
+                <a href="#" class="flex items-center group">
+                    <img src="images/logo.png" alt="Palette Concept Logo" class="h-10 sm:h-12 w-auto object-contain group-hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/200x60/transparent/FFF?text=Palette+Concept';">
+                </a>
 
-  <!-- 主視覺 Banner -->
-  <div class="hero">
-    <h1>COLOR YOUR LIFE!</h1>
-    <p>The Creative Agency for Social Impact — 將繽紛色彩與創意注入您的品牌與生活中。</p>
-  </div>
+                <!-- Desktop Nav Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors">關於我們</a>
+                    <a href="#services" class="text-sm font-medium text-gray-300 hover:text-pink-400 transition-colors">服務項目</a>
+                    <a href="#portfolio" class="text-sm font-medium text-gray-300 hover:text-yellow-400 transition-colors">精選案例</a>
+                    <a href="#contact" class="px-5 py-2.5 text-sm font-bold text-gray-900 bg-cmyk-gradient rounded-full hover:shadow-lg hover:shadow-pink-500/20 transform hover:-translate-y-0.5 transition-all">
+                        聯絡我們
+                    </a>
+                </nav>
 
-  <!-- 關於我們區塊 -->
-  <section id="about">
-    <div class="about-content">
-      <h2>關於我們 (About Us)</h2>
-      <p>
-        生活應該充滿色彩！我們相信不同的產品和服務是讓每個人生活變得更多姿多彩的元素。<br>
-        Palette Concept 透過專業設計服務、展覽設計、短視頻動畫及營銷推廣，協助客戶將自身品牌與公司最好的產品和服務呈現於消費者眼前，讓人留下深刻良好印象。
-      </p>
-    </div>
-  </section>
-
-  <!-- 我們的服務區塊 -->
-  <section id="services">
-    <div style="text-align: center;">
-      <h2 style="font-size: 2.2rem; color: #1e293b;">我們服務 (Our Services)</h2>
-      <p style="color: #64748b; margin-top: 10px;">為您提供全方位的專業設計與營銷解決方案</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <h3>🎨 Design Services</h3>
-        <ul>
-          <li>> Poster Design (海報設計)</li>
-          <li>> Logo Design (標誌設計)</li>
-          <li>> Business Card Design (名片設計)</li>
-          <li>> Booth Design (展覽攤位設計)</li>
-          <li>> Website Design (網頁設計)</li>
-        </ul>
-      </div>
-      <div class="service-card" style="border-top-color: #ec4899;">
-        <h3>🎬 Motion Graphic / Animation</h3>
-        <ul>
-          <li>> Custom animation for Reels / IG / FB</li>
-          <li>> Customised Character (IP) Design</li>
-          <li>> Customised Story Contents</li>
-        </ul>
-      </div>
-      <div class="service-card" style="border-top-color: #eab308;">
-        <h3>📈 Marketing Services</h3>
-        <ul>
-          <li>> FB / IG Content Marketing</li>
-          <li>> Network Strategy & Technology</li>
-          <li>> Data Analysis & Promotion</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- 參考案例區塊 -->
-  <section id="portfolio">
-    <div style="text-align: center;">
-      <h2 style="font-size: 2.2rem; color: #1e293b;">參考案例 (References)</h2>
-      <p style="color: #64748b; margin-top: 10px;">精選展覽攤位、大型慶典與社會公益設計項目</p>
-    </div>
-    <div class="portfolio-grid">
-      
-      <!-- 案例一 -->
-      <div class="portfolio-item">
-        <img src="images/case-wisebase.jpg" alt="Wise Base 展覽攤位設計">
-        <div class="portfolio-info">
-          <span class="badge">展覽設計</span>
-          <h3>Wise Base Corporation Limited</h3>
-          <p>香港會議展覽中心教育及博覽大型展位項目規劃與視覺設計[cite: 6]。</p>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="text-gray-300 hover:text-white focus:outline-none p-2 rounded-lg">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <!-- 案例二 -->
-      <div class="portfolio-item">
-        <img src="images/case-shuntin.jpg" alt="香港精算扶輪社順天邨長幼共融計劃">
-        <div class="portfolio-info">
-          <span class="badge" style="background: #dcfce7; color: #16a34a;">社會公益</span>
-          <h3>香港精算扶輪社 - 順天邨長幼共融計劃</h3>
-          <p>社區活動主視覺橫額、宣傳海報及 multigenerational 護老活動場地佈置[cite: 7]。</p>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-gray-800 px-4 pt-4 pb-6 space-y-3">
+            <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-200 hover:bg-gray-800">關於我們</a>
+            <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-200 hover:bg-gray-800">服務項目</a>
+            <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-200 hover:bg-gray-800">精選案例</a>
+            <a href="#contact" class="block px-3 py-2.5 text-center font-bold text-gray-900 bg-cmyk-gradient rounded-full">聯絡我們</a>
         </div>
-      </div>
+    </header>
 
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden">
+        <!-- Background Decorative Orbs -->
+        <div class="absolute top-1/4 left-10 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-3xl"></div>
 
-  <!-- 聯絡我們區塊 -->
-  <footer id="contact">
-    <p>© 2026 Palette Concept. All Rights Reserved.</p>
-    <p style="margin-top: 8px; font-size: 0.9rem; color: #94a3b8;">官方網站：https://www.paletteconcept.com/[cite: 1]</p>
-  </footer>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <!-- CMYK Color Dots Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-white/10 mb-8 animate-float">
+                <span class="w-2.5 h-2.5 rounded-full cmyk-dot-c"></span>
+                <span class="w-2.5 h-2.5 rounded-full cmyk-dot-m"></span>
+                <span class="w-2.5 h-2.5 rounded-full cmyk-dot-y"></span>
+                <span class="w-2.5 h-2.5 rounded-full cmyk-dot-k"></span>
+                <span class="text-xs uppercase tracking-widest text-gray-300 font-bold ml-1">Color Your Life</span>
+            </div>
 
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-none mb-6">
+                Palette Concept
+                <span class="block text-xl sm:text-3xl md:text-4xl font-extrabold text-cmyk-gradient mt-4 tracking-normal">
+                    THE CREATIVE AGENCY FOR SOCIAL IMPACT
+                </span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 leading-relaxed font-light mb-10">
+                生活應該充滿色彩！我們透過專業設計、展覽企劃與數碼營銷推廣，將繽紛顏色與生命力注入每個品牌與社會項目中。
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#services" class="w-full sm:w-auto px-8 py-4 rounded-full font-bold text-gray-900 bg-cmyk-gradient hover:shadow-xl hover:shadow-cyan-500/25 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                    <span>探索服務項目</span>
+                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                </a>
+                <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 rounded-full font-bold text-white glass-panel hover:bg-white/10 border border-white/20 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-eye"></i>
+                    <span>瀏覽成功案例</span>
+                </a>
+            </div>
+
+            <!-- Stats / Highlights -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-20 pt-10 border-t border-gray-800/80">
+                <div class="text-center">
+                    <div class="text-3xl sm:text-4xl font-black text-cyan-400">100+</div>
+                    <div class="text-xs sm:text-sm text-gray-400 mt-1">品牌設計專案</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl sm:text-4xl font-black text-pink-500">50+</div>
+                    <div class="text-xs sm:text-sm text-gray-400 mt-1">展覽與大型活動</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl sm:text-4xl font-black text-yellow-400">98%</div>
+                    <div class="text-xs sm:text-sm text-gray-400 mt-1">客戶滿意肯定</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl sm:text-4xl font-black text-purple-400">Social</div>
+                    <div class="text-xs sm:text-sm text-gray-400 mt-1">深耕社會影響力</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-24 relative bg-gray-950/60 border-y border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Visual Illustration Side -->
+                <div class="relative">
+                    <div class="absolute -inset-1 rounded-3xl bg-cmyk-gradient opacity-30 blur-xl"></div>
+                    <div class="relative glass-panel rounded-3xl p-8 sm:p-10 border border-white/10 overflow-hidden">
+                        <div class="flex items-center gap-3 mb-6">
+                            <span class="w-4 h-4 rounded-full bg-cyan-400"></span>
+                            <span class="w-4 h-4 rounded-full bg-pink-500"></span>
+                            <span class="w-4 h-4 rounded-full bg-yellow-400"></span>
+                            <span class="text-xs font-mono text-gray-400 uppercase tracking-wider ml-auto">Palette_Core_V2</span>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800">
+                                <h4 class="text-pink-400 font-bold mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-palette"></i> 色彩哲學 Color Philosophy
+                                </h4>
+                                <p class="text-sm text-gray-300 leading-relaxed">
+                                    生活應該充滿色彩！我們相信不同的產品和服務，是讓每個人生活變得更多姿多彩的關鍵元素。
+                                </p>
+                            </div>
+                            <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800">
+                                <h4 class="text-cyan-400 font-bold mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-bullseye"></i> 品牌使命 Brand Mission
+                                </h4>
+                                <p class="text-sm text-gray-300 leading-relaxed">
+                                    透過專業視覺設計、展覽空間規劃、短視頻動畫及數字營銷推廣，協助客戶將優質產品與服務完美呈現於消費者眼前。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Content Side -->
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-bold uppercase tracking-wider">
+                        <i class="fa-regular fa-star"></i> About Us 關於我們
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Palette Concept <br>
+                        <span class="text-cmyk-gradient">Color your Life!</span>
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed text-base sm:text-lg">
+                        <strong>Palette Concept</strong> 是一間專注於社會影響力（Social Impact）的創意設計與營銷機構。
+                    </p>
+                    <p class="text-gray-400 leading-relaxed">
+                        我們相信每一個品牌、每一個活動都有其獨特的生命色彩。Palette Concept 透過多元化的專業服務，讓人留下深刻良好的第一印象，仿似將繽紛顏色注入到大家的日常生活與事業事業成長中！
+                    </p>
+                    
+                    <div class="pt-4 grid grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3">
+                            <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+                                <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white text-sm">創意視覺驅動</h5>
+                                <p class="text-xs text-gray-400">打造具感染力的品牌形象</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="p-2.5 rounded-xl bg-pink-500/10 border border-pink-500/30 text-pink-400">
+                                <i class="fa-solid fa-chart-line text-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white text-sm">精準數碼營銷</h5>
+                                <p class="text-xs text-gray-400">放大社群關注度與轉化</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4">
+                    <i class="fa-solid fa-cubes"></i> Our Services 我們服務
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+                    三大核心領域 <span class="text-cmyk-gradient">全方位創意方案</span>
+                </h2>
+                <p class="text-gray-400 mt-4 text-base sm:text-lg">
+                    從平面視覺、展覽空間到動態動畫與社交媒體策略，為您打造量身訂製的宣傳效果。
+                </p>
+            </div>
+
+            <!-- Service Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1: Design Services -->
+                <div class="glass-panel rounded-3xl p-8 border border-white/10 hover:border-cyan-500/50 transition-all duration-300 group hover:-translate-y-2 relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Design Services</h3>
+                        <span class="text-xs text-cyan-400 font-mono">01</span>
+                    </div>
+                    <h4 class="text-sm font-semibold text-gray-400 mb-6">專業設計服務</h4>
+
+                    <ul class="space-y-3.5 text-sm text-gray-300">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-cyan-400 text-xs"></i>
+                            <span>Poster Design 海報設計</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-cyan-400 text-xs"></i>
+                            <span>Logo Design 品牌標誌設計</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-cyan-400 text-xs"></i>
+                            <span>Business Card Design 名片設計</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-cyan-400 text-xs"></i>
+                            <span>Booth Design 展覽攤位設計</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-cyan-400 text-xs"></i>
+                            <span>Website Design 網頁設計</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Motion Graphic / Animation -->
+                <div class="glass-panel rounded-3xl p-8 border border-white/10 hover:border-pink-500/50 transition-all duration-300 group hover:-translate-y-2 relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-film"></i>
+                    </div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-2xl font-bold text-white group-hover:text-pink-400 transition-colors">Motion & IP</h3>
+                        <span class="text-xs text-pink-400 font-mono">02</span>
+                    </div>
+                    <h4 class="text-sm font-semibold text-gray-400 mb-6">動態圖形與動畫製作</h4>
+
+                    <ul class="space-y-3.5 text-sm text-gray-300">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-pink-400 text-xs"></i>
+                            <span>Custom Animation (Reels/FB/IG/Web)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-pink-400 text-xs"></i>
+                            <span>Customised Character (IP) Design 專屬角色設計</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-pink-400 text-xs"></i>
+                            <span>Customised Story Contents 故事內容腳本策劃</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-pink-400 text-xs"></i>
+                            <span>短視頻動態包裝與特效</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Marketing Services -->
+                <div class="glass-panel rounded-3xl p-8 border border-white/10 hover:border-yellow-400/50 transition-all duration-300 group hover:-translate-y-2 relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-yellow-400/20 text-yellow-400 flex items-center justify-center text-2xl font-bold mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-2xl font-bold text-white group-hover:text-yellow-400 transition-colors">Marketing</h3>
+                        <span class="text-xs text-yellow-400 font-mono">03</span>
+                    </div>
+                    <h4 class="text-sm font-semibold text-gray-400 mb-6">數碼營銷推廣</h4>
+
+                    <ul class="space-y-3.5 text-sm text-gray-300">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-yellow-400 text-xs"></i>
+                            <span>FB/IG Content Marketing 社群圖文營銷</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-yellow-400 text-xs"></i>
+                            <span>Social Strategy 社群傳播策略</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-yellow-400 text-xs"></i>
+                            <span>Target Audience Analysis 廣告精準推廣</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check text-yellow-400 text-xs"></i>
+                            <span>Brand Storytelling 品牌故事包裝</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio / Cases Section -->
+    <section id="portfolio" class="py-24 bg-gray-950/80 border-t border-gray-800/80 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 text-xs font-bold uppercase tracking-wider mb-4">
+                        <i class="fa-solid fa-briefcase"></i> Portfolio 精選作品
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+                        參考案例 Showcase
+                    </h2>
+                </div>
+
+                <!-- Portfolio Category Filter -->
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0" id="portfolio-filters">
+                    <button data-filter="all" class="filter-btn px-4 py-2 rounded-full text-xs font-bold bg-cmyk-gradient text-gray-900 transition-all">全部作品</button>
+                    <button data-filter="booth" class="filter-btn px-4 py-2 rounded-full text-xs font-bold glass-panel text-gray-300 hover:text-white transition-all">展覽攤位</button>
+                    <button data-filter="branding" class="filter-btn px-4 py-2 rounded-full text-xs font-bold glass-panel text-gray-300 hover:text-white transition-all">品牌與大會</button>
+                    <button data-filter="social" class="filter-btn px-4 py-2 rounded-full text-xs font-bold glass-panel text-gray-300 hover:text-white transition-all">社會公益</button>
+                    <button data-filter="marketing" class="filter-btn px-4 py-2 rounded-full text-xs font-bold glass-panel text-gray-300 hover:text-white transition-all">社交媒體圖文</button>
+                </div>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+                
+                <!-- Project 1: Wise Base Booth Design -->
+                <div class="portfolio-item booth glass-panel rounded-3xl overflow-hidden border border-white/10 group">
+                    <div class="relative h-64 bg-gray-900 overflow-hidden">
+                        <!-- Simulated Image Container -->
+                        <div class="w-full h-full bg-gradient-to-br from-blue-900 via-indigo-950 to-slate-900 p-6 flex flex-col justify-between relative group-hover:scale-105 transition-transform duration-500">
+                            <div class="flex justify-between items-start">
+                                <span class="bg-blue-500/20 text-cyan-300 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-400/30">Booth Design</span>
+                                <i class="fa-solid fa-monument text-4xl text-blue-400/20"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-cyan-400 font-mono mb-1">灣仔會議展覽中心 展位 1E-C31 & 33</div>
+                                <h4 class="text-lg font-bold text-white">Wise Base Corporation 智本有限公司</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">展覽攤位專案</span>
+                        <h3 class="text-xl font-bold text-white mt-1 mb-2">香港教育及職業博覽大型攤位設計</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            為智本有限公司（Wise Base）量身打造展覽攤位，結合英倫風格建築天際線與亮眼配色，成功吸引大量目標家長與學生諮詢。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Project 2: Kowloon Chamber of Commerce -->
+                <div class="portfolio-item branding glass-panel rounded-3xl overflow-hidden border border-white/10 group">
+                    <div class="relative h-64 bg-gray-900 overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-red-950 via-red-900 to-amber-950 p-6 flex flex-col justify-between relative group-hover:scale-105 transition-transform duration-500">
+                            <div class="flex justify-between items-start">
+                                <span class="bg-red-500/20 text-red-300 text-[10px] font-bold px-3 py-1 rounded-full border border-red-400/30">Event Visual</span>
+                                <i class="fa-solid fa-crown text-4xl text-amber-400/20"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-amber-300 font-mono mb-1">Since 1938 • 周年慶典</div>
+                                <h4 class="text-lg font-bold text-white">九龍總商會成立 86 周年會慶聯歡大會</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">大會主視覺與典禮設計</span>
+                        <h3 class="text-xl font-bold text-white mt-1 mb-2">九龍總商會 86 周年慶典包裝</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            以「說好香港故事」為主題，融合金色典雅元素與香港維港地標天際線，打造氣勢磅礡的大會主背景與典禮設計。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Project 3: Rotary Club Shun Tin Estate -->
+                <div class="portfolio-item social glass-panel rounded-3xl overflow-hidden border border-white/10 group">
+                    <div class="relative h-64 bg-gray-900 overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-teal-900 via-emerald-950 to-slate-900 p-6 flex flex-col justify-between relative group-hover:scale-105 transition-transform duration-500">
+                            <div class="flex justify-between items-start">
+                                <span class="bg-teal-500/20 text-teal-300 text-[10px] font-bold px-3 py-1 rounded-full border border-teal-400/30">Social Impact</span>
+                                <i class="fa-solid fa-hands-holding-child text-4xl text-teal-400/20"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-teal-300 font-mono mb-1">社區長幼共融專案 2025</div>
+                                <h4 class="text-lg font-bold text-white">香港精算扶輪社</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-teal-400 uppercase tracking-wider">公益活動推廣視覺</span>
+                        <h3 class="text-xl font-bold text-white mt-1 mb-2">順天邨長幼共融計劃啟動禮</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            專為香港精算扶輪社設計之彩虹暖心視覺，結合順天邨社區地標，傳遞溫暖、和諧與跨世代交流的正面社會影響力。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Project 4: Rotary Blood Donation & Seminars -->
+                <div class="portfolio-item social glass-panel rounded-3xl overflow-hidden border border-white/10 group">
+                    <div class="relative h-64 bg-gray-900 overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-blue-950 via-sky-950 to-indigo-900 p-6 flex flex-col justify-between relative group-hover:scale-105 transition-transform duration-500">
+                            <div class="flex justify-between items-start">
+                                <span class="bg-sky-500/20 text-sky-300 text-[10px] font-bold px-3 py-1 rounded-full border border-sky-400/30">Poster & Banner</span>
+                                <i class="fa-solid fa-heart-pulse text-4xl text-sky-400/20"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-sky-300 font-mono mb-1">捐血日 & 專題講座</div>
+                                <h4 class="text-lg font-bold text-white">香港精算扶輪社系列海報</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">海報與宣傳品設計</span>
+                        <h3 class="text-xl font-bold text-white mt-1 mb-2">公益捐血日與例會講座宣傳設計</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            包含「捐一次血救五個人」主題海報、立法會議員分享會及名人慈善賽宣傳視覺，傳達清明專業的公眾形象。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Project 5: Wise Base Social Media Marketing (Education Care) -->
+                <div class="portfolio-item marketing glass-panel rounded-3xl overflow-hidden border border-white/10 group">
+                    <div class="relative h-64 bg-gray-900 overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-purple-950 via-pink-950 to-slate-900 p-6 flex flex-col justify-between relative group-hover:scale-105 transition-transform duration-500">
+                            <div class="flex justify-between items-start">
+                                <span class="bg-pink-500/20 text-pink-300 text-[10px] font-bold px-3 py-1 rounded-full border border-pink-400/30">Social Content</span>
+                                <i class="fa-solid fa-graduation-cap text-4xl text-pink-400/20"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-pink-300 font-mono mb-1">FB / IG 圖文推廣</div>
+                                <h4 class="text-lg font-bold text-white">教育管家 (Wise Base)</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">社交媒體內容營銷</span>
+                        <h3 class="text-xl font-bold text-white mt-1 mb-2">升學資訊與面試指南圖文包</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            設計「啟動孩子信心 4 步驟」、「國際學校選校重點」等系列社群懶人包圖文，提升社群互動率與品牌專業權威度。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Project 6: IP Character & Motion Animation -->
+                <div class="portfolio-item branding marketing glass-panel rounded-3xl overflow-hidden border border-white/10 group">
+                    <div class="relative h-64 bg-gray-900 overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-amber-950 via-yellow-950 to-slate-900 p-6 flex flex-col justify-between relative group-hover:scale-105 transition-transform duration-500">
+                            <div class="flex justify-between items-start">
+                                <span class="bg-yellow-500/20 text-yellow-300 text-[10px] font-bold px-3 py-1 rounded-full border border-yellow-400/30">Motion & IP</span>
+                                <i class="fa-solid fa-shapes text-4xl text-yellow-400/20"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-yellow-300 font-mono mb-1">IP 角色與動畫</div>
+                                <h4 class="text-lg font-bold text-white">IP Character & Reel Video</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-yellow-400 uppercase tracking-wider">動態圖形與IP角色</span>
+                        <h3 class="text-xl font-bold text-white mt-1 mb-2">品牌專屬 IP 角色短片製作</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            客製化 IP 角色設計與 Facebook/IG Reels 短視頻動態製作，幫助品牌以生動活潑的方式與年輕世代消費者對話。
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Value Proposition -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-8 sm:p-14 border border-white/10 relative">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                    <div class="space-y-3">
+                        <div class="text-cyan-400 text-3xl font-bold"><i class="fa-solid fa-palette"></i></div>
+                        <h4 class="text-xl font-bold text-white">專業視覺美學</h4>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            精準掌控 CMYK 色彩與現代設計趨勢，讓品牌在廣大市場中脱穎而出，留下極致深刻印象。
+                        </p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="text-pink-500 text-3xl font-bold"><i class="fa-solid fa-lightbulb"></i></div>
+                        <h4 class="text-xl font-bold text-white">全方位一站式服務</h4>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            從概念構思、平面設計、3D 展位規劃到動畫與數字營銷，滿足企業全方位的宣傳需求。
+                        </p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="text-yellow-400 text-3xl font-bold"><i class="fa-solid fa-heart"></i></div>
+                        <h4 class="text-xl font-bold text-white">賦能社會影響力</h4>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            特別關注 Social Impact 專案，透過設計為社會團體、教育機構與公益夥伴注入正能量。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative bg-gray-950 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Contact Info Side -->
+                <div class="space-y-8">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-xs font-bold uppercase tracking-wider mb-4">
+                            <i class="fa-solid fa-envelope"></i> Contact Us 聯絡我們
+                        </div>
+                        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+                            讓 Palette Concept <br>
+                            <span class="text-cmyk-gradient">點亮您的品牌色彩！</span>
+                        </h2>
+                        <p class="text-gray-400 mt-4 text-base">
+                            無論是展覽攤位設計、品牌包裝、短視頻動畫或社交媒體推廣，歡迎與我們聊聊您的新企劃！
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 glass-panel p-4 rounded-2xl border border-white/5">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-globe"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 font-semibold">官方網站 Website</div>
+                                <a href="https://www.paletteconcept.com/" target="_blank" class="text-white font-bold hover:text-cyan-400 transition-colors">
+                                    www.paletteconcept.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 glass-panel p-4 rounded-2xl border border-white/5">
+                            <div class="w-12 h-12 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 font-semibold">專案諮詢 Email</div>
+                                <div class="text-white font-bold">info@paletteconcept.com</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 glass-panel p-4 rounded-2xl border border-white/5">
+                            <div class="w-12 h-12 rounded-xl bg-yellow-400/20 text-yellow-400 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-hashtag"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-400 font-semibold">社交媒體 Follow Us</div>
+                                <div class="flex gap-4 mt-1 text-gray-300">
+                                    <a href="#" class="hover:text-cyan-400 transition-colors"><i class="fa-brands fa-facebook text-lg"></i></a>
+                                    <a href="#" class="hover:text-pink-400 transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
+                                    <a href="#" class="hover:text-yellow-400 transition-colors"><i class="fa-brands fa-youtube text-lg"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Side -->
+                <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-white/10 relative">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">您的姓名 / 公司名稱 *</label>
+                            <input type="text" required placeholder="例如: 智本有限公司 / Alex Wong" class="w-full px-4 py-3 rounded-xl bg-gray-900/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">電郵地址 *</label>
+                            <input type="email" required placeholder="yourname@example.com" class="w-full px-4 py-3 rounded-xl bg-gray-900/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">感興趣的服務項目</label>
+                            <select class="w-full px-4 py-3 rounded-xl bg-gray-900/80 border border-gray-700 text-white focus:outline-none focus:border-pink-500 transition-colors text-sm">
+                                <option>專業設計服務 (Poster / Logo / Booth Design)</option>
+                                <option>動態圖形與動畫製作 (Motion Animation / IP Character)</option>
+                                <option>數碼營銷推廣 (FB/IG Content Marketing)</option>
+                                <option>全方位品牌推廣方案</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">專案細節與需求說明</label>
+                            <textarea rows="4" placeholder="請簡述您的需求、預算或期望完成時間..." class="w-full px-4 py-3 rounded-xl bg-gray-900/80 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors text-sm"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl font-bold text-gray-900 bg-cmyk-gradient hover:shadow-lg hover:shadow-cyan-500/20 transition-all transform hover:-translate-y-0.5">
+                            發送諮詢訊息
+                        </button>
+                    </form>
+
+                    <!-- Form submission message box (No alert used) -->
+                    <div id="form-message" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-sm text-center">
+                        <i class="fa-solid fa-circle-check mr-2"></i> 感謝您的訊息！我們的團隊將於 24 小時內與您聯繫。
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-gray-950 border-t border-gray-900 text-gray-500 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-1">
+                    <span class="w-2.5 h-2.5 rounded-full cmyk-dot-c"></span>
+                    <span class="w-2.5 h-2.5 rounded-full cmyk-dot-m"></span>
+                    <span class="w-2.5 h-2.5 rounded-full cmyk-dot-y"></span>
+                    <span class="w-2.5 h-2.5 rounded-full border border-gray-600 bg-gray-900"></span>
+                </div>
+                <span class="font-bold text-gray-300">Palette Concept</span>
+            </div>
+            
+            <p class="text-center sm:text-left text-xs">
+                &copy; 2026 Palette Concept Co. All rights reserved. Color your Life!
+            </p>
+
+            <div class="text-xs text-gray-400">
+                <a href="https://www.paletteconcept.com/" target="_blank" class="hover:text-cyan-400 transition-colors">paletteconcept.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Portfolio Filter Functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active styling from all buttons
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-cmyk-gradient', 'text-gray-900');
+                    b.classList.add('glass-panel', 'text-gray-300');
+                });
+
+                // Add active styling to clicked button
+                btn.classList.add('bg-cmyk-gradient', 'text-gray-900');
+                btn.classList.remove('glass-panel', 'text-gray-300');
+
+                const filter = btn.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.classList.contains(filter)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Form Submit Handler (avoiding standard alert)
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formMessage.classList.remove('hidden');
+            contactForm.reset();
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 5000);
+        });
+    </script>
 </body>
 </html>
