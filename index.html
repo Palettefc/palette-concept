@@ -349,20 +349,24 @@
                 </div>
 
                 <!-- Card 4: Animation -->
-                <div class="glass-panel rounded-2xl overflow-hidden border border-white/10 hover:border-purple-500/40 transition-all duration-300 group">
-                    <div class="relative h-56 overflow-hidden cursor-zoom-in" onclick="openLightbox(this)">
-                        <video src="images/case-animation.mp4" alt="IP短視頻" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/600x400/161B2E/A855F7?text=Motion+Animation';">
-                        <span class="absolute top-3 right-3 bg-purple-500/80 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20">短視頻</span>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-lg font-bold text-white mb-2">IP角色造型與社群短視頻</h3>
-                        <p class="text-sm text-gray-400 leading-relaxed mb-4">量身打造品牌 IP形象、故事腳本開發及Reels/IG/小紅書/抖音/影音號自訂短視頻製作。</p>
-                        <div class="flex items-center gap-4 text-xs text-gray-500 pt-3 border-t border-gray-800">
-                            <span><i class="fa-regular fa-calendar mr-1 text-purple-400"></i> 2026</span>
-                            <span><i class="fa-solid fa-film mr-1 text-purple-400"></i> Motion Animation</span>
-                        </div>
-                    </div>
-                </div>
+<div class="portfolio-card">
+  <div class="card-media">
+    <video src="images/case-animation.mp4" 
+           class="portfolio-video portfolio-img" 
+           autoplay muted loop playsinline 
+           onclick="openVideoModal(this)">
+    </video>
+    <span class="card-tag" style="background: rgba(238, 187, 0, 0.85); color: #000;">動態動畫</span>
+  </div>
+  <div class="portfolio-content">
+    <h3>IP 角色造型與社群短片動畫</h3>
+    <p>量身打造品牌 IP 形象、故事腳本開發及 Reels / IG 自訂動畫短片製作。</p>
+    <div class="portfolio-meta">
+      <span><i class="fas fa-calendar"></i> 2026</span>
+      <span><i class="fas fa-film"></i> Motion Animation</span>
+    </div>
+  </div>
+</div>
 
                 <!-- Card 5: Branding -->
                 <div class="glass-panel rounded-2xl overflow-hidden border border-white/10 hover:border-emerald-500/40 transition-all duration-300 group">
@@ -401,11 +405,49 @@
     </section>
 
     <!-- Full-screen Lightbox Modal Overlay -->
-    <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox(event)">
-        <span class="absolute top-6 right-8 text-white hover:text-cyan-400 text-4xl font-bold cursor-pointer transition-colors z-50" onclick="closeLightbox(event)">&times;</span>
-        <img id="lightboxImg" class="lightbox-img" alt="全螢幕案例預覽">
-        <div id="lightboxCaption" class="mt-4 text-gray-300 text-sm font-medium text-center max-w-xl px-4"></div>
-    </div>
+    // 修改後的開啟燈箱函式（同時支援圖片與影片）
+function openModal(mediaElement) {
+  const modal = document.getElementById('imageModal');
+  const modalContainer = modal.querySelector('.modal-body-container') || modal; // 燈箱容器
+  
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+
+  // 判斷點擊的是影片還是圖片
+  if (mediaElement.tagName.toLowerCase() === 'video') {
+    // 如果是影片，動態生成一個可播放、有聲音的放大版影片
+    modal.innerHTML = `
+      <span class="modal-close" onclick="closeModal(event)">&times;</span>
+      <video class="modal-content" src="${mediaElement.src}" controls autoplay playsinline></video>
+      <div class="modal-caption">IP 角色造型與社群短片動畫全螢幕預覽</div>
+    `;
+  } else {
+    // 如果是圖片，維持原本的 Lightbox 顯示方式
+    modal.innerHTML = `
+      <span class="modal-close" onclick="closeModal(event)">&times;</span>
+      <img class="modal-content" src="${mediaElement.src}" alt="${mediaElement.alt}">
+      <div class="modal-caption">${mediaElement.alt || '案例預覽'}</div>
+    `;
+  }
+}
+
+// 關閉燈箱時順便重置 Modal 結構，避免影片背景繼續播放
+function closeModal(event) {
+  if (event.target.id === 'imageModal' || event.target.classList.contains('modal-close')) {
+    const modal = document.getElementById('imageModal');
+    modal.classList.remove('show');
+    document.body.style.overflow = 'auto';
+    
+    // 延遲清空內容以停止影片播放
+    setTimeout(() => {
+      modal.innerHTML = `
+        <span class="modal-close" onclick="closeModal(event)">&times;</span>
+        <img class="modal-content" id="modalImage" alt="全螢幕預覽">
+        <div id="modalCaption" class="modal-caption"></div>
+      `;
+    }, 300);
+  }
+}
 
     <!-- Contact & Footer Section -->
     <footer id="contact" class="bg-gray-950 border-t border-gray-900 py-12 text-center text-gray-500 text-sm">
