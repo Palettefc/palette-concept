@@ -412,41 +412,7 @@
   modal.classList.add('show');
   document.body.style.overflow = 'hidden';
 
-  // 判斷點擊的是影片還是圖片
-  if (mediaElement.tagName.toLowerCase() === 'video') {
-    // 如果是影片，動態生成一個可播放、有聲音的放大版影片
-    modal.innerHTML = `
-      <span class="modal-close" onclick="closeModal(event)">&times;</span>
-      <video class="modal-content" src="${mediaElement.src}" controls autoplay playsinline></video>
-      <div class="modal-caption">IP 角色造型與社群短片動畫全螢幕預覽</div>
-    `;
-  } else {
-    // 如果是圖片，維持原本的 Lightbox 顯示方式
-    modal.innerHTML = `
-      <span class="modal-close" onclick="closeModal(event)">&times;</span>
-      <img class="modal-content" src="${mediaElement.src}" alt="${mediaElement.alt}">
-      <div class="modal-caption">${mediaElement.alt || '案例預覽'}</div>
-    `;
-  }
-}
-
-// 關閉燈箱時順便重置 Modal 結構，避免影片背景繼續播放
-function closeModal(event) {
-  if (event.target.id === 'imageModal' || event.target.classList.contains('modal-close')) {
-    const modal = document.getElementById('imageModal');
-    modal.classList.remove('show');
-    document.body.style.overflow = 'auto';
-    
-    // 延遲清空內容以停止影片播放
-    setTimeout(() => {
-      modal.innerHTML = `
-        <span class="modal-close" onclick="closeModal(event)">&times;</span>
-        <img class="modal-content" id="modalImage" alt="全螢幕預覽">
-        <div id="modalCaption" class="modal-caption"></div>
-      `;
-    }, 300);
-  }
-}
+ 
 
     <!-- Contact & Footer Section -->
     <footer id="contact" class="bg-gray-950 border-t border-gray-900 py-12 text-center text-gray-500 text-sm">
